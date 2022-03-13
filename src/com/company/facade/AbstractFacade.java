@@ -9,5 +9,4 @@ public abstract class AbstractFacade<T> {
     public List<T> get() {
         return this.list;
     }
-
 }
