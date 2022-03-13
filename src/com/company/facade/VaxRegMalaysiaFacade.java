@@ -14,22 +14,26 @@ public class VaxRegMalaysiaFacade extends AbstractFacade<VaxRegMalaysia> {
     static String vaxCSV = baseUrl + "registration/vaxreg_malaysia.csv";
 
     @Override
-    public List<VaxRegMalaysia> get() throws IOException {
-        URL url = new URL(vaxCSV);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("User-Agent", "Mozilla/5.0");
-        conn.setRequestProperty("Accept-Charset", "UTF-8");
-        conn.setReadTimeout(15000);
-        conn.setConnectTimeout(15000);
-        conn.setUseCaches(true);
-        conn.connect();
+    public List<VaxRegMalaysia> get() {
+        try {
+            URL url = new URL(vaxCSV);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("User-Agent", "Mozilla/5.0");
+            conn.setRequestProperty("Accept-Charset", "UTF-8");
+            conn.setReadTimeout(15000);
+            conn.setConnectTimeout(15000);
+            conn.setUseCaches(true);
+            conn.connect();
 
-        if (conn.getResponseCode() == 200) {
-            InputStreamReader isr = new InputStreamReader(conn.getInputStream());
-            BufferedReader br = new BufferedReader(isr);
-            return br.lines().skip(1).map(VaxRegMalaysia::new).toList();
+            if (conn.getResponseCode() == 200) {
+                InputStreamReader isr = new InputStreamReader(conn.getInputStream());
+                BufferedReader br = new BufferedReader(isr);
+                return br.lines().skip(1).map(VaxRegMalaysia::new).toList();
+            }
+            return super.get();
+        } catch (IOException e) {
+            return super.get();
         }
-        return super.get();
     }
 }
