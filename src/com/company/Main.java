@@ -17,6 +17,7 @@ public class Main {
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("User-Agent", "Mozilla/5.0");
+        conn.setRequestProperty("Accept-Charset", "UTF-8");
         conn.setReadTimeout(15000);
         conn.setConnectTimeout(15000);
         conn.setUseCaches(true);
@@ -27,12 +28,12 @@ public class Main {
             BufferedReader br = new BufferedReader(isr);
             List<VaxMalaysia> lines = br.lines().skip(1).map(VaxMalaysia::new).toList();
             System.out.println("[START]\tPrint Malaysian Vaccination Status");
-            lines.forEach(System.out::println);
+            lines.stream().limit(5).forEach(System.out::println);
+            System.out.println("omitted...");
             System.out.println("[END]\tPrint Malaysian Vaccination Status");
             System.out.println("[START]\tPrint Malaysian Vaccination Status on 2021-05-03");
             lines.stream().filter(x -> x.date.equals("2021-05-03")).forEach(System.out::println);
             System.out.println("[END]\tPrint Malaysian Vaccination Status on 2021-05-03");
-
         }
 
 
@@ -50,7 +51,8 @@ public class Main {
             BufferedReader br = new BufferedReader(isr);
             List<VaxRegMalaysia> lines = br.lines().skip(1).map(VaxRegMalaysia::new).toList();
             System.out.println("[START]\tPrint Malaysian Registration Status");
-            lines.forEach(System.out::println);
+            lines.stream().limit(5).forEach(System.out::println);
+            System.out.println("omitted...");
             System.out.println("[END]\tPrint Malaysian Registration Status");
             System.out.println("[START]\tPrint Malaysian Registration Status on 2021-10-03");
             lines.stream().filter(x -> x.date.equals("2021-10-03")).forEach(System.out::println);

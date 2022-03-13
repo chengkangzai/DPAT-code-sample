@@ -36,7 +36,7 @@ public class VaxRegMalaysia {
     public String toString() {
         return "VaxRegMalaysia{" +
                 "date=" + date +
-                ", state='" + state + '\'' +
+                ", state='" + state +
                 ", total=" + total +
                 ", phase2=" + phase2 +
                 ", mysj=" + mysj +
@@ -50,6 +50,4 @@ public class VaxRegMalaysia {
                 ", oku=" + oku +
                 '}';
     }
-
-
 }
