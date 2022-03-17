@@ -16,7 +16,15 @@ public class VaxRegMalaysia {
     private Integer oku;
 
     public VaxRegMalaysia(String line) {
+        if (line == null || line.isEmpty()) {
+            return;
+        }
+
         String[] split = line.split(",");
+        if (split.length != 13) {
+            return;
+        }
+
         this.date = split[0];
         this.state = split[1];
         this.total = Integer.parseInt(split[2]);

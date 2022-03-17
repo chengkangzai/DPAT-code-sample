@@ -37,7 +37,15 @@ public class VaxMalaysia {
     private Integer pending;
 
     public VaxMalaysia(String line) {
+        if (line == null) {
+            return;
+        }
+
         String[] split = line.split(",");
+        if (split.length != 34) {
+            return;
+        }
+
         this.date = split[0];
         this.daily_partial = Integer.parseInt(split[1]);
         this.daily_full = Integer.parseInt(split[2]);
